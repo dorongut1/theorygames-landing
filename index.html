@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תורת המשחקים | חוויות דיגיטליות בהתאמה אישית</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Heebo', sans-serif; }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .card-gradient {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .glow {
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.3);
+        }
+
+        .glow-pink {
+            box-shadow: 0 0 40px rgba(236, 72, 153, 0.3);
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
+        }
+
+        .glow-green {
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .demo-frame {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .game-card {
+            transition: all 0.4s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .demo-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .demo-tab {
+            padding: 12px 24px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .demo-tab.active {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: #000;
+            font-weight: bold;
+        }
+        .demo-tab:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+        .demo-tab:not(.active):hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex flex-col justify-center items-center px-4 py-12 relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-20 left-10 text-8xl opacity-10 animate-float">🎮</div>
+        <div class="absolute bottom-20 right-10 text-8xl opacity-10 animate-float" style="animation-delay: 2s;">🎯</div>
+        <div class="absolute top-40 right-20 text-6xl opacity-10 animate-float" style="animation-delay: 4s;">✨</div>
+
+        <div class="text-center max-w-4xl mx-auto relative z-10">
+            <div class="text-6xl mb-6">🎲</div>
+            <h1 class="text-5xl md:text-7xl font-black mb-4">
+                <span class="text-gradient">תורת המשחקים</span>
+            </h1>
+            <p class="text-2xl md:text-3xl text-gray-300 mb-6">
+                חוויות דיגיטליות אינטראקטיביות בהתאמה אישית
+            </p>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
+                משחקים מעוצבים ומרגשים לכל אירוע: חגים, ערבי גיבוש, ימי הולדת, ערכים ועוד -
+                <br>כל אחד מותאם במיוחד עבורכם
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#contact" class="bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 py-4 rounded-full text-lg transition-all hover:scale-105 shadow-lg">
+                    בואו ניצור יחד ←
+                </a>
+                <a href="#demos" class="card-gradient px-8 py-4 rounded-full text-lg font-bold hover:bg-white/20 transition-all">
+                    ראו דוגמאות
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <div class="text-3xl opacity-50">↓</div>
+        </div>
+    </header>
+
+    <!-- What We Do Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">מה אנחנו עושים?</h2>
+            <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+                יוצרים משחקים דיגיטליים מרהיבים שמשלבים בין טכנולוגיה, עיצוב, ותוכן משמעותי
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-gradient rounded-3xl p-8 hover-lift text-center">
+                    <div class="text-5xl mb-4">🎨</div>
+                    <h3 class="text-2xl font-bold mb-3">עיצוב מרהיב</h3>
+                    <p class="text-gray-400">ממשקים יפהפיים עם אנימציות, אפקטים, ותמונות שיוצרים חוויה ויזואלית מרשימה</p>
+                </div>
+
+                <div class="card-gradient rounded-3xl p-8 hover-lift text-center">
+                    <div class="text-5xl mb-4">🎮</div>
+                    <h3 class="text-2xl font-bold mb-3">אינטראקטיביות</h3>
+                    <p class="text-gray-400">משחקים, חידונים, בחירות אישיות - המשתתפים פעילים ומעורבים לאורך כל הדרך</p>
+                </div>
+
+                <div class="card-gradient rounded-3xl p-8 hover-lift text-center">
+                    <div class="text-5xl mb-4">💎</div>
+                    <h3 class="text-2xl font-bold mb-3">התאמה אישית</h3>
+                    <p class="text-gray-400">כל משחק נבנה במיוחד עבורכם - התוכן, העיצוב, והמסרים מותאמים לאירוע שלכם</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demos Gallery Section -->
+    <section id="demos" class="py-20 px-4 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">דוגמאות חיות</h2>
+            <p class="text-xl text-gray-400 text-center mb-12">
+                כמה מהמשחקים שיצרנו - לחצו לנסות!
+            </p>
+
+            <!-- Games Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Game 1: Our Story - Couples Game -->
+                <div class="game-card card-gradient rounded-3xl overflow-hidden relative glow-pink">
+                    <div class="badge">חדש!</div>
+                    <div class="h-48 bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
+                        <span class="text-7xl">💑</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-pink-500/30 text-pink-300 px-3 py-1 rounded-full">זוגות</span>
+                            <span class="text-xs bg-rose-500/30 text-rose-300 px-3 py-1 rounded-full">יום נישואין</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">הסיפור שלנו</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            משחק זוגי רומנטי ליום נישואין - מסע משותף עם משחקים, זיכרונות, הבטחות ותעודת אהבה בסוף
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs text-gray-500">🎯 3 מסלולים</span>
+                            <span class="text-xs text-gray-500">⏱️ 15-45 דקות</span>
+                            <span class="text-xs text-gray-500">🎮 6 משחקים</span>
+                        </div>
+                        <a href="https://dorongut1.github.io/our-story-unified/" target="_blank"
+                           class="block w-full text-center bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 py-3 rounded-xl font-bold transition-all">
+                            נסו עכשיו ←
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Game 2: BiYachad Team Game -->
+                <div class="game-card card-gradient rounded-3xl overflow-hidden relative glow-purple">
+                    <div class="badge">חדש!</div>
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                        <span class="text-7xl">👥</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-purple-500/30 text-purple-300 px-3 py-1 rounded-full">קבוצות</span>
+                            <span class="text-xs bg-indigo-500/30 text-indigo-300 px-3 py-1 rounded-full">גיבוש</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">ביחד - משחק קבוצתי</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            משחק גיבוש לקבוצות עם מנחה - שאלות, אתגרים והצבעות בזמן אמת. מושלם לערבי צוות!
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs text-gray-500">👨‍💼 מנחה + משתתפים</span>
+                            <span class="text-xs text-gray-500">📱 מולטי-פלייר</span>
+                            <span class="text-xs text-gray-500">🔄 סנכרון חי</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="https://dorongut1.github.io/biyachad-team-game/?host=true" target="_blank"
+                               class="text-center bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 py-3 rounded-xl font-bold transition-all text-sm">
+                                כניסת מנחה
+                            </a>
+                            <a href="https://dorongut1.github.io/biyachad-team-game" target="_blank"
+                               class="text-center bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold transition-all text-sm border border-white/20">
+                                כניסת משתתף
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 3: Tu BiShvat -->
+                <div class="game-card card-gradient rounded-3xl overflow-hidden relative glow-green">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                        <span class="text-7xl">🌳</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-green-500/30 text-green-300 px-3 py-1 rounded-full">חגים</span>
+                            <span class="text-xs bg-emerald-500/30 text-emerald-300 px-3 py-1 rounded-full">ט"ו בשבט</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">כי האדם עץ השדה</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            מסע אינטראקטיבי בין שלבי גידול העץ לצמיחה אישית, עם מקורות יהודיים ותעודה אישית
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs text-gray-500">🌱 8 שלבי צמיחה</span>
+                            <span class="text-xs text-gray-500">📖 מקורות יהודיים</span>
+                            <span class="text-xs text-gray-500">🏆 תעודה אישית</span>
+                        </div>
+                        <a href="https://dorongut1.github.io/tubishvat-games/ki-haadam-etz/" target="_blank"
+                           class="block w-full text-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 py-3 rounded-xl font-bold transition-all">
+                            נסו עכשיו ←
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- More coming soon -->
+            <div class="mt-12 text-center">
+                <p class="text-gray-500 mb-4">ועוד המון משחקים בדרך...</p>
+                <div class="flex justify-center gap-4 text-4xl opacity-30">
+                    <span>🎄</span>
+                    <span>🕎</span>
+                    <span>🎭</span>
+                    <span>🎂</span>
+                    <span>📚</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Demo Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">נסו עכשיו!</h2>
+            <p class="text-xl text-gray-400 text-center mb-8">
+                בחרו משחק ונסו אותו ישירות מכאן
+            </p>
+
+            <!-- Demo Tabs -->
+            <div class="demo-tabs mb-8">
+                <button class="demo-tab active" onclick="switchDemo('couples')">💑 הסיפור שלנו</button>
+                <button class="demo-tab" onclick="switchDemo('team')">👥 ביחד</button>
+                <button class="demo-tab" onclick="switchDemo('tubishvat')">🌳 ט"ו בשבט</button>
+            </div>
+
+            <!-- Demo Frame -->
+            <div class="demo-frame glow max-w-4xl mx-auto">
+                <iframe
+                    id="demo-iframe"
+                    src="https://dorongut1.github.io/our-story-unified/"
+                    class="w-full h-[600px] bg-gray-900"
+                    title="דמו משחק"
+                ></iframe>
+            </div>
+
+            <div class="text-center mt-6">
+                <a id="demo-link" href="https://dorongut1.github.io/our-story-unified/" target="_blank"
+                   class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-bold">
+                    פתח בחלון חדש ←
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const demos = {
+            couples: {
+                url: 'https://dorongut1.github.io/our-story-unified/',
+                title: 'הסיפור שלנו'
+            },
+            team: {
+                url: 'https://dorongut1.github.io/biyachad-team-game/',
+                title: 'ביחד - משחק קבוצתי'
+            },
+            tubishvat: {
+                url: 'https://dorongut1.github.io/tubishvat-games/ki-haadam-etz/',
+                title: 'כי האדם עץ השדה'
+            }
+        };
+
+        function switchDemo(key) {
+            const iframe = document.getElementById('demo-iframe');
+            const link = document.getElementById('demo-link');
+            const tabs = document.querySelectorAll('.demo-tab');
+
+            // Update iframe
+            iframe.src = demos[key].url;
+            link.href = demos[key].url;
+
+            // Update tabs
+            tabs.forEach((tab, index) => {
+                const tabKeys = ['couples', 'team', 'tubishvat'];
+                if (tabKeys[index] === key) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+    </script>
+
+    <!-- Use Cases Section -->
+    <section class="py-20 px-4 bg-black/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">לאיזה אירועים זה מתאים?</h2>
+            <p class="text-xl text-gray-400 text-center mb-16">כמעט לכל דבר! הנה כמה דוגמאות:</p>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Category Cards -->
+                <div class="card-gradient rounded-2xl p-6 hover-lift text-center">
+                    <div class="category-icon">🎄</div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">חגים</h3>
+                    <p class="text-sm text-gray-400">פסח, חנוכה, פורים, ט"ו בשבט, ראש השנה...</p>
+                </div>
+
+                <div class="card-gradient rounded-2xl p-6 hover-lift text-center">
+                    <div class="category-icon">🏢</div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">ארגונים</h3>
+                    <p class="text-sm text-gray-400">ערבי גיבוש, ימי כיף, הדרכות, אירועי חברה</p>
+                </div>
+
+                <div class="card-gradient rounded-2xl p-6 hover-lift text-center">
+                    <div class="category-icon">🏫</div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">חינוך</h3>
+                    <p class="text-sm text-gray-400">בתי ספר, גנים, מדרשות, תנועות נוער</p>
+                </div>
+
+                <div class="card-gradient rounded-2xl p-6 hover-lift text-center">
+                    <div class="category-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">משפחה</h3>
+                    <p class="text-sm text-gray-400">ימי הולדת, שבת משפחתית, מסיבות, איחודים</p>
+                </div>
+
+                <div class="card-gradient rounded-2xl p-6 hover-lift text-center">
+                    <div class="category-icon">💍</div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">אירועים</h3>
+                    <p class="text-sm text-gray-400">בר/בת מצווה, יום נישואין, אירועי שמחה</p>
+                </div>
+
+                <div class="card-gradient rounded-2xl p-6 hover-lift text-center">
+                    <div class="category-icon">💝</div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">מתנות</h3>
+                    <p class="text-sm text-gray-400">מתנה מיוחדת לזוג, להורים, לחברים</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">איך זה עובד?</h2>
+
+            <div class="space-y-8">
+                <div class="flex gap-6 items-start">
+                    <div class="bg-amber-500 text-black w-12 h-12 rounded-full flex items-center justify-center font-black text-xl flex-shrink-0">1</div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">שיחה ראשונית</h3>
+                        <p class="text-gray-400">מספרים לי על האירוע, הקהל, והמטרות. מה אתם רוצים שהמשתתפים ירגישו ויקחו?</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start">
+                    <div class="bg-amber-500 text-black w-12 h-12 rounded-full flex items-center justify-center font-black text-xl flex-shrink-0">2</div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">תכנון ועיצוב</h3>
+                        <p class="text-gray-400">אני מתכנן את המשחק - שלבים, משחקיות, עיצוב ותוכן מותאם אישית לאירוע שלכם</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start">
+                    <div class="bg-amber-500 text-black w-12 h-12 rounded-full flex items-center justify-center font-black text-xl flex-shrink-0">3</div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">פיתוח ובדיקות</h3>
+                        <p class="text-gray-400">בונה את המשחק, בודק שהכל עובד מעולה, ומשפר לפי הערות שלכם</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start">
+                    <div class="bg-amber-500 text-black w-12 h-12 rounded-full flex items-center justify-center font-black text-xl flex-shrink-0">4</div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">מסירה ושימוש</h3>
+                        <p class="text-gray-400">מקבלים קישור למשחק - מוכן לשימוש! עובד בכל מכשיר: מחשב, טאבלט, טלפון</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-black/30">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">בואו ניצור משהו מיוחד</h2>
+            <p class="text-xl text-gray-400 mb-12">
+                יש לכם אירוע מתקרב? רעיון למשחק? רוצים להפתיע מישהו?
+                <br>דברו איתי!
+            </p>
+
+            <div class="card-gradient rounded-3xl p-8 glow">
+                <div class="grid sm:grid-cols-2 gap-6 mb-8">
+                    <a href="https://wa.me/972528261063" class="bg-green-600 hover:bg-green-500 p-6 rounded-2xl flex items-center justify-center gap-3 font-bold text-lg transition-all hover:scale-105">
+                        <span class="text-3xl">📱</span>
+                        WhatsApp
+                    </a>
+                    <a href="mailto:torat.hamishakim@gmail.com" class="bg-blue-600 hover:bg-blue-500 p-6 rounded-2xl flex items-center justify-center gap-3 font-bold text-lg transition-all hover:scale-105">
+                        <span class="text-3xl">📧</span>
+                        אימייל
+                    </a>
+                </div>
+
+                <p class="text-gray-400 text-sm">
+                    * כל פרויקט מתומחר בהתאם להיקף ולמורכבות
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 border-t border-white/10 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-4xl mb-4">🎲</div>
+            <h3 class="text-2xl font-bold text-gradient mb-2">תורת המשחקים</h3>
+            <p class="text-gray-500">חוויות דיגיטליות בהתאמה אישית</p>
+            <p class="text-gray-600 text-sm mt-4">© 2025 כל הזכויות שמורות</p>
+        </div>
+    </footer>
+
+</body>
+</html>
